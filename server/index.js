@@ -29,6 +29,7 @@ mongoose
     console.error(`Error in connection to MongoDB: ${err.message}`)
   );
 
+//  Middleware to handle error
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "internal server error";
