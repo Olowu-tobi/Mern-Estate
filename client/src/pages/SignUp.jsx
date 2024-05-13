@@ -1,8 +1,7 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useAuthState, useRegister } from "../features/hooks/useAuth";
+import { useRegister } from "../features/hooks/useAuth";
 import { toast } from "react-toastify";
 import { useLoading } from "../features/hooks/useLoading";
 

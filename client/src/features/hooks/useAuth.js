@@ -2,17 +2,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loginThunk, logoutThunk, registerThunk } from "../slices/authSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const login = async (credentials) => {
-    // eslint-disable-next-line no-useless-catch
     try {
-      await dispatch(loginThunk(credentials));
+      const result = await dispatch(loginThunk(credentials));
+      await unwrapResult(result);
+      navigate("/"); // Navigate to the homepage after a successful login
     } catch (error) {
-      throw error;
+      return error.message;
     }
   };
+
   return login;
 };
 

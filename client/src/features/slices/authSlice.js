@@ -11,6 +11,7 @@ export const loginThunk = createAsyncThunk(
     try {
       const loginResp = await api.postWithOutToken("/auth/login", credentials);
       toast.success("Successfully logged in");
+
       return loginResp;
     } catch (error) {
       toast.error(error.response.data.message);
