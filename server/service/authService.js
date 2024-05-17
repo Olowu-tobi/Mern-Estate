@@ -1,12 +1,12 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/UserModel");
+const User = require("../models/userModel");
 const saltrounds = 10;
 
-const loginUser = async (email, password, username) => {
+const loginUser = async (email, password) => {
   // check for user with email or username
   const user = await User.findOne({
-    $or: [{ username }, { email }],
+    email,
   });
   if (!user) {
     throw new Error("User not found");
@@ -20,7 +20,8 @@ const loginUser = async (email, password, username) => {
   const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET, {
     expiresIn: 86400,
   });
-  return { token };
+  const userWithoutPassword = { ...user._doc, password: undefined };
+  return { token, user: userWithoutPassword };
 };
 
 const registerUser = async (userdata) => {

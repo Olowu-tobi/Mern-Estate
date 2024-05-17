@@ -8,22 +8,27 @@ const routes = [
   {
     path: "/",
     element: Home,
+    isPrivate: true,
   },
   {
     path: "/about",
     element: About,
+    isPrivate: true,
   },
   {
     path: "/profile",
     element: Profile,
+    isPrivate: true,
   },
   {
     path: "/sign-up",
     element: SignUp,
+    isPrivate: false,
   },
   {
     path: "/login",
     element: Login,
+    isPrivate: false,
   },
 ];
 

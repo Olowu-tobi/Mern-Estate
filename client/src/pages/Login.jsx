@@ -1,14 +1,12 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLogin } from "../features/hooks/useAuth";
-import { toast } from "react-toastify";
 import { useLoading } from "../features/hooks/useLoading";
 
 function Login() {
   const { isRequestLoading, setLoading } = useLoading();
   const login = useLogin();
-  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",

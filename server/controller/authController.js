@@ -8,6 +8,7 @@ const loginUser = async (req, res, next) => {
       message: "User logged in successfully",
       status: true,
       token: loginResp.token,
+      user: loginResp.user,
     });
   } catch (err) {
     next(err);

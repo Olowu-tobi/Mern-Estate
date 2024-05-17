@@ -1,25 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import routes from "./routes/routes";
 import "react-toastify/dist/ReactToastify.css";
-
-import Home from "./pages/Home";
-import Header from "./Components/Header";
-import {ToastContainer} from 'react-toastify'
+import { ToastContainer } from "react-toastify";
+import AuthMiddleware from "./middleware/AuthMiddleware";
 
 function App() {
   return (
-   <div className="bg-[rgb(241,245,241)] h-screen">
-  <ToastContainer/>
+    <div>
+      <ToastContainer />
       <BrowserRouter>
-      <Header/>
         <Routes>
           {routes.map((route, index) => (
-            <Route key={index} path={route.path} element={(<route.element/>,)} />
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <AuthMiddleware isPrivate={route.isPrivate}>
+                  <route.element />
+                </AuthMiddleware>
+              }
+            />
           ))}
         </Routes>
       </BrowserRouter>
-  
-   </div>
+    </div>
   );
 }
 

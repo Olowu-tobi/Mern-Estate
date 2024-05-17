@@ -1,12 +1,22 @@
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { useLogout } from "../features/hooks/useAuth";
+import { setUser } from "../features/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 function Header() {
+  const logout = useLogout();
+  const dispatch = useDispatch();
+  const handdleLogin = () => {
+    dispatch(setUser(null));
+    logout();
+  };
+
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <NavLink to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
+          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap cursor">
             <span className="text-slate-500">Tobi</span>
             <span className="text-slate-700">Estate</span>
           </h1>
@@ -21,14 +31,21 @@ function Header() {
         </form>
         <ul className="flex gap-4 text-slate-700">
           <NavLink to="/">
-            <li className="hidden sm:inline hover:underline">Home</li>
+            <li className="hidden sm:inline cursor-pointer hover:underline">
+              Home
+            </li>
           </NavLink>{" "}
           <NavLink to="/about">
-            <li className="hidden sm:inline hover:underline">About</li>
+            <li className="hidden sm:inline cursor-pointer hover:underline">
+              About
+            </li>
           </NavLink>
-          <NavLink to="/login">
-            <li className=" hover:underline">Login</li>
-          </NavLink>
+          <li
+            className=" hover:underline cursor-pointer"
+            onClick={handdleLogin}
+          >
+            Logout{" "}
+          </li>
         </ul>
       </div>
     </header>
